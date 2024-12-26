@@ -144,6 +144,16 @@
                     "nama": "Siti",
                     "nim": "654321",
                     "ipk": 3.6
+                },
+                {
+                    "nama": "Budi",
+                    "nim": "123456",
+                    "ipk": 3.8
+                },
+                {
+                    "nama": "Siti",
+                    "nim": "654321",
+                    "ipk": 3.6
                 }
             ]
         },
@@ -181,6 +191,22 @@
                     "nama": "Beliana",
                     "nim": "5234014832",
                     "ipk": 4.0
+                }
+            ]
+        },
+        {
+            "nama_beasiswa": "Beasiswa Mahasiswa Berprestasi UTY",
+            "fakultas": "Fakultas Teknik",
+            "prodi": "Teknik Informatika",
+            "tanggal_mulai": "2024-10-19",
+            "tanggal_akhir": "2025-01-20",
+            "kuota": 1,
+            "batas_ipk": 3.2,
+            "mahasiswa": [
+                {
+                    "nama": "Budi",
+                    "nim": "123456",
+                    "ipk": 3.8
                 }
             ]
         }
