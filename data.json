@@ -1,0 +1,141 @@
+{
+    "nama_universitas": "Universitas Contoh",
+    "fakultas": [
+        {
+            "nama_fakultas": "Fakultas Teknik",
+            "prodi": [
+                {
+                    "nama_prodi": "Teknik Informatika",
+                    "akreditasi": "A",
+                    "kuota": 2,
+                    "batas_ipk": 3.5,
+                    "mahasiswa": [
+                        {
+                            "nama": "Budi",
+                            "nim": "123456",
+                            "ipk": 3.8,
+                            "tanggal_daftar": "2024-12-27"
+                        },
+                        {
+                            "nama": "Siti",
+                            "nim": "654321",
+                            "ipk": 3.6,
+                            "tanggal_daftar": "2024-12-27"
+                        },
+                        {
+                            "nama": "Khameer Al-Jaleel",
+                            "nim": "5230411311",
+                            "ipk": 3.55,
+                            "tanggal_daftar": "2024-12-27"
+                        }
+                    ]
+                },
+                {
+                    "nama_prodi": "Teknik Elektro",
+                    "akreditasi": "B",
+                    "kuota": 5,
+                    "batas_ipk": 3.2,
+                    "mahasiswa": [
+                        {
+                            "nama": "Andi",
+                            "nim": "112233",
+                            "ipk": 3.4,
+                            "tanggal_daftar": "2024-12-27"
+                        },
+                        {
+                            "nama": "Rina",
+                            "nim": "332211",
+                            "ipk": 3.1,
+                            "tanggal_daftar": "2024-12-27"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "nama_fakultas": "Fakultas Ekonomi",
+            "prodi": [
+                {
+                    "nama_prodi": "Manajemen",
+                    "akreditasi": "A",
+                    "kuota": 8,
+                    "batas_ipk": 3.3,
+                    "mahasiswa": [
+                        {
+                            "nama": "Dewi",
+                            "nim": "445566",
+                            "ipk": 3.7,
+                            "tanggal_daftar": "2024-12-27"
+                        },
+                        {
+                            "nama": "Agus",
+                            "nim": "665544",
+                            "ipk": 3.5,
+                            "tanggal_daftar": "2024-12-27"
+                        },
+                        {
+                            "nama": "Saman Brembo",
+                            "nim": "52301230",
+                            "ipk": 3.0,
+                            "tanggal_daftar": "2024-12-27"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "beasiswa": [
+        {
+            "nama_beasiswa": "Beasiswa Informatika 1",
+            "fakultas": "Fakultas Teknik",
+            "prodi": "Teknik Informatika",
+            "tanggal_mulai": "2024-12-01",
+            "tanggal_akhir": "2024-12-30",
+            "kuota": 2,
+            "batas_ipk": 3.5,
+            "mahasiswa": [
+                {
+                    "nama": "Budi",
+                    "nim": "123456",
+                    "ipk": 3.8
+                },
+                {
+                    "nama": "Siti",
+                    "nim": "654321",
+                    "ipk": 3.6
+                },
+                {
+                    "nama": "Budi",
+                    "nim": "123456",
+                    "ipk": 3.8
+                },
+                {
+                    "nama": "Siti",
+                    "nim": "654321",
+                    "ipk": 3.6
+                }
+            ]
+        },
+        {
+            "nama_beasiswa": "Beasiswa Manajemen 1",
+            "fakultas": "Fakultas Ekonomi",
+            "prodi": "Manajemen",
+            "tanggal_mulai": "2024-12-01",
+            "tanggal_akhir": "2024-12-30",
+            "kuota": 2,
+            "batas_ipk": 3.5,
+            "mahasiswa": [
+                {
+                    "nama": "Dewi",
+                    "nim": "445566",
+                    "ipk": 3.7
+                },
+                {
+                    "nama": "Agus",
+                    "nim": "665544",
+                    "ipk": 3.5
+                }
+            ]
+        }
+    ]
+}
