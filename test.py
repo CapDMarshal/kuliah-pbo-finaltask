@@ -3,6 +3,7 @@ from datetime import datetime
 import pandas as pd
 import json
 
+# Kelas Mahasiswa merepresentasikan data mahasiswa
 class Mahasiswa:
     def __init__(self, nama, nim, ipk):
         self.nama = nama
@@ -11,31 +12,38 @@ class Mahasiswa:
         self.status = None
         self.tanggal_daftar = datetime.now()
 
+# Kelas ProgramStudi merepresentasikan program studi
 class ProgramStudi:
     def __init__(self, nama_prodi, akreditasi):
         self.nama_prodi = nama_prodi
         self.akreditasi = akreditasi
         self.daftar_mahasiswa = []
 
+    # Metode untuk menambahkan mahasiswa ke dalam program studi
     def tambah_mahasiswa(self, mahasiswa):
         self.daftar_mahasiswa.append(mahasiswa)
 
+# Kelas Fakultas merepresentasikan fakultas
 class Fakultas:
     def __init__(self, nama_fakultas):
         self.nama_fakultas = nama_fakultas
         self.daftar_prodi = []
 
+    # Metode untuk menambahkan program studi ke dalam fakultas
     def tambah_prodi(self, prodi):
         self.daftar_prodi.append(prodi)
 
+# Kelas Universitas merepresentasikan universitas
 class Universitas:
     def __init__(self, nama_universitas):
         self.nama_universitas = nama_universitas
         self.daftar_fakultas = []
 
+    # Metode untuk menambahkan fakultas ke dalam universitas
     def tambah_fakultas(self, fakultas):
         self.daftar_fakultas.append(fakultas)
 
+# Kelas SeleksiMahasiswa mengelola proses seleksi mahasiswa untuk beasiswa
 class SeleksiMahasiswa:
     def __init__(self, data):
         self.data = data
@@ -59,6 +67,7 @@ class SeleksiMahasiswa:
                     )
                     prodi.tambah_mahasiswa(mahasiswa)
 
+    # Metode untuk menambahkan mahasiswa baru ke dalam program studi tertentu
     def tambah_mahasiswa(self, nama_fakultas, nama_prodi, nama, nim, ipk):
         fakultas = next((f for f in self.universitas.daftar_fakultas if f.nama_fakultas == nama_fakultas), None)
         if not fakultas:
@@ -73,9 +82,10 @@ class SeleksiMahasiswa:
         mahasiswa = Mahasiswa(nama, nim, ipk)
         prodi.tambah_mahasiswa(mahasiswa)
 
-        # Update the JSON data
+        # Memperbarui data JSON
         self.update_json()
 
+    # Metode untuk memperbarui file JSON dengan data terbaru dari objek Universitas
     def update_json(self):
         data = {
             "nama_universitas": self.universitas.nama_universitas,
@@ -109,6 +119,7 @@ class SeleksiMahasiswa:
         with open('data.json', 'w') as f:
             json.dump(data, f, indent=4)
 
+    # Metode untuk menampilkan data mahasiswa dalam bentuk tabel
     def tampilkan_mahasiswa(self):
         if not self.universitas.daftar_fakultas:
             st.write("Tidak ada data mahasiswa.")
@@ -130,6 +141,7 @@ class SeleksiMahasiswa:
                 df = pd.DataFrame(data)
                 st.table(df)
 
+    # Metode untuk melakukan seleksi beasiswa berdasarkan nama beasiswa yang dipilih
     def seleksi_beasiswa(self, nama_beasiswa):
         st.write(f"\nSeleksi Beasiswa {nama_beasiswa}:")
         lulus = []
@@ -188,6 +200,7 @@ class SeleksiMahasiswa:
 
         self.update_json()
 
+    # Metode untuk membuat beasiswa baru dengan mengisi form yang disediakan
     def buat_beasiswa(self):
         st.write("\nPembuatan Beasiswa per Program Studi:")
 
@@ -221,6 +234,7 @@ class SeleksiMahasiswa:
             self.data["beasiswa"].append(beasiswa_data)
             self.update_json()
 
+# Fungsi utama yang dijalankan saat program dimulai
 def main():
     with open('data.json', 'r') as f:
         data = json.load(f)
