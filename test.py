@@ -188,7 +188,7 @@ class SeleksiMahasiswa:
             for nama_fakultas, nama_prodi, mahasiswa in tidak_lulus:
                 st.write(f"Fakultas: {nama_fakultas}, Program Studi: {nama_prodi}, Nama: {mahasiswa.nama}, NIM: {mahasiswa.nim}, IPK: {mahasiswa.ipk:.2f}")
 
-        # Append selected students to the corresponding beasiswa in the JSON data
+
         for beasiswa in self.data["beasiswa"]:
             if beasiswa["nama_beasiswa"] == nama_beasiswa:
                 for _, _, mahasiswa in lulus:
@@ -221,7 +221,6 @@ class SeleksiMahasiswa:
             st.write(f"Periode Pendaftaran: {tanggal_mulai} hingga {tanggal_akhir}")
             st.write(f"Kuota Beasiswa: {kuota}, Batas IPK: {batas_ipk:.2f}")
 
-            # Update the JSON data
             beasiswa_data = {
                 "nama_beasiswa": nama_beasiswa,
                 "fakultas": fakultas_nama,
