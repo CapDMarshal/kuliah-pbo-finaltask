@@ -7,8 +7,6 @@
                 {
                     "nama_prodi": "Teknik Informatika",
                     "akreditasi": "A",
-                    "kuota": 2,
-                    "batas_ipk": 3.5,
                     "mahasiswa": [
                         {
                             "nama": "Budi",
@@ -33,8 +31,6 @@
                 {
                     "nama_prodi": "Teknik Elektro",
                     "akreditasi": "B",
-                    "kuota": 5,
-                    "batas_ipk": 3.2,
                     "mahasiswa": [
                         {
                             "nama": "Andi",
@@ -58,8 +54,6 @@
                 {
                     "nama_prodi": "Manajemen",
                     "akreditasi": "A",
-                    "kuota": 8,
-                    "batas_ipk": 3.3,
                     "mahasiswa": [
                         {
                             "nama": "Dewi",
@@ -82,6 +76,23 @@
                     ]
                 }
             ]
+        },
+        {
+            "nama_fakultas": "Fakultas Kedokteran",
+            "prodi": [
+                {
+                    "nama_prodi": "Kedokteran",
+                    "akreditasi": "A",
+                    "mahasiswa": [
+                        {
+                            "nama": "Beliana",
+                            "nim": "5234014832",
+                            "ipk": 4.0,
+                            "tanggal_daftar": "2024-12-27"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "beasiswa": [
@@ -94,6 +105,16 @@
             "kuota": 2,
             "batas_ipk": 3.5,
             "mahasiswa": [
+                {
+                    "nama": "Budi",
+                    "nim": "123456",
+                    "ipk": 3.8
+                },
+                {
+                    "nama": "Siti",
+                    "nim": "654321",
+                    "ipk": 3.6
+                },
                 {
                     "nama": "Budi",
                     "nim": "123456",
@@ -146,6 +167,24 @@
                     "ipk": 3.5
                 }
             ]
+        },
+        {
+            "nama_beasiswa": "Bidik Misi",
+            "fakultas": "Fakultas Kedokteran",
+            "prodi": "Kedokteran",
+            "tanggal_mulai": "2024-10-19",
+            "tanggal_akhir": "2025-01-05",
+            "kuota": 1,
+            "batas_ipk": 3.5,
+            "mahasiswa": [
+                {
+                    "nama": "Beliana",
+                    "nim": "5234014832",
+                    "ipk": 4.0
+                }
+            ]
         }
-    ]
+    ],
+    "kuota": 10,
+    "batas_ipk": 3.5
 }

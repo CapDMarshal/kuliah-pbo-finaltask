@@ -12,25 +12,13 @@ class Mahasiswa:
         self.tanggal_daftar = datetime.now()
 
 class ProgramStudi:
-    def __init__(self, nama_prodi, akreditasi, kuota, batas_ipk):
+    def __init__(self, nama_prodi, akreditasi):
         self.nama_prodi = nama_prodi
         self.akreditasi = akreditasi
-        self.kuota = kuota
-        self.batas_ipk = batas_ipk
         self.daftar_mahasiswa = []
-        self.mahasiswa_lulus = []
 
     def tambah_mahasiswa(self, mahasiswa):
         self.daftar_mahasiswa.append(mahasiswa)
-
-    def seleksi_beasiswa(self, mahasiswa):
-        if len(self.mahasiswa_lulus) < self.kuota:
-            if mahasiswa.ipk >= self.batas_ipk:
-                mahasiswa.status = "Lolos Beasiswa"
-                self.mahasiswa_lulus.append(mahasiswa)
-                return True
-        mahasiswa.status = "Tidak Lolos"
-        return False
 
 class Fakultas:
     def __init__(self, nama_fakultas):
@@ -52,15 +40,15 @@ class SeleksiMahasiswa:
     def __init__(self, data):
         self.data = data
         self.universitas = Universitas(data["nama_universitas"])
+        self.kuota = data.get("kuota", 10)
+        self.batas_ipk = data.get("batas_ipk", 3.5)
         for fakultas_data in data["fakultas"]:
             fakultas = Fakultas(fakultas_data["nama_fakultas"])
             self.universitas.tambah_fakultas(fakultas)
             for prodi_data in fakultas_data["prodi"]:
                 prodi = ProgramStudi(
                     prodi_data["nama_prodi"],
-                    prodi_data["akreditasi"],
-                    prodi_data["kuota"],
-                    prodi_data["batas_ipk"]
+                    prodi_data["akreditasi"]
                 )
                 fakultas.tambah_prodi(prodi)
                 for mahasiswa_data in prodi_data["mahasiswa"]:
@@ -79,7 +67,7 @@ class SeleksiMahasiswa:
 
         prodi = next((p for p in fakultas.daftar_prodi if p.nama_prodi == nama_prodi), None)
         if not prodi:
-            prodi = ProgramStudi(nama_prodi, "A", 10, 3.5)
+            prodi = ProgramStudi(nama_prodi, "A")
             fakultas.tambah_prodi(prodi)
 
         mahasiswa = Mahasiswa(nama, nim, ipk)
@@ -92,7 +80,9 @@ class SeleksiMahasiswa:
         data = {
             "nama_universitas": self.universitas.nama_universitas,
             "fakultas": [],
-            "beasiswa": self.data.get("beasiswa", [])
+            "beasiswa": self.data.get("beasiswa", []),
+            "kuota": self.kuota,
+            "batas_ipk": self.batas_ipk
         }
         for fakultas in self.universitas.daftar_fakultas:
             fakultas_data = {
@@ -103,8 +93,6 @@ class SeleksiMahasiswa:
                 prodi_data = {
                     "nama_prodi": prodi.nama_prodi,
                     "akreditasi": prodi.akreditasi,
-                    "kuota": prodi.kuota,
-                    "batas_ipk": prodi.batas_ipk,
                     "mahasiswa": []
                 }
                 for mahasiswa in prodi.daftar_mahasiswa:
@@ -165,7 +153,7 @@ class SeleksiMahasiswa:
                         for mahasiswa in prodi.daftar_mahasiswa:
                             if tanggal_mulai <= mahasiswa.tanggal_daftar <= tanggal_akhir:
                                 valid_tanggal = True
-                                if len(lulus) < kuota and prodi.seleksi_beasiswa(mahasiswa):
+                                if len(lulus) < kuota and mahasiswa.ipk >= beasiswa["batas_ipk"]:
                                     lulus.append((fakultas.nama_fakultas, prodi.nama_prodi, mahasiswa))
                                 else:
                                     tidak_lulus.append((fakultas.nama_fakultas, prodi.nama_prodi, mahasiswa))
@@ -187,7 +175,6 @@ class SeleksiMahasiswa:
         else:
             for nama_fakultas, nama_prodi, mahasiswa in tidak_lulus:
                 st.write(f"Fakultas: {nama_fakultas}, Program Studi: {nama_prodi}, Nama: {mahasiswa.nama}, NIM: {mahasiswa.nim}, IPK: {mahasiswa.ipk:.2f}")
-
 
         for beasiswa in self.data["beasiswa"]:
             if beasiswa["nama_beasiswa"] == nama_beasiswa:
@@ -255,9 +242,7 @@ def main():
         prodi = next((p for p in fakultas.daftar_prodi if p.nama_prodi == nama_prodi), None)
         if not prodi:
             akreditasi = st.text_input("Akreditasi Program Studi:").upper()
-            kuota = st.number_input("Kuota Program Studi:", min_value=1)
-            batas_ipk = st.number_input("Batas IPK Program Studi:", min_value=0.0, max_value=4.0, step=0.01)
-            prodi = ProgramStudi(nama_prodi, akreditasi, kuota, batas_ipk)
+            prodi = ProgramStudi(nama_prodi, akreditasi)
             fakultas.tambah_prodi(prodi)
 
         nama = st.text_input("Nama Mahasiswa:").title()
