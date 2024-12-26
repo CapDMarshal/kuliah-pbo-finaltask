@@ -245,10 +245,21 @@ def main():
     menu = st.selectbox("Menu", ["Tambah Mahasiswa", "Tampilkan Mahasiswa", "Atur Seleksi Beasiswa", "Seleksi Beasiswa"])
 
     if menu == "Tambah Mahasiswa":
-        nama_fakultas = st.selectbox("Pilih Nama Fakultas:", [f.nama_fakultas for f in seleksi.universitas.daftar_fakultas])
+        nama_fakultas = st.text_input("Nama Fakultas:").title()
         fakultas = next((f for f in seleksi.universitas.daftar_fakultas if f.nama_fakultas == nama_fakultas), None)
+        if not fakultas:
+            fakultas = Fakultas(nama_fakultas)
+            seleksi.universitas.tambah_fakultas(fakultas)
 
-        nama_prodi = st.selectbox("Pilih Nama Program Studi:", [p.nama_prodi for p in fakultas.daftar_prodi])
+        nama_prodi = st.text_input("Nama Program Studi:").title()
+        prodi = next((p for p in fakultas.daftar_prodi if p.nama_prodi == nama_prodi), None)
+        if not prodi:
+            akreditasi = st.text_input("Akreditasi Program Studi:").upper()
+            kuota = st.number_input("Kuota Program Studi:", min_value=1)
+            batas_ipk = st.number_input("Batas IPK Program Studi:", min_value=0.0, max_value=4.0, step=0.01)
+            prodi = ProgramStudi(nama_prodi, akreditasi, kuota, batas_ipk)
+            fakultas.tambah_prodi(prodi)
+
         nama = st.text_input("Nama Mahasiswa:").title()
         nim = st.text_input("NIM:")
         ipk = st.number_input("IPK:", min_value=0.0, max_value=4.0, step=0.01)
